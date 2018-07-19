@@ -27,6 +27,7 @@ public class Shop implements java.io.Serializable {
     private String shopName;
     private String nit;
     private String personType;
+    private String shortName;
 
     public Shop() {
     }
@@ -112,4 +113,15 @@ public class Shop implements java.io.Serializable {
         this.personType = personType;
     }
 
+    @Column(name = "SHORT_NAME")
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    
+    
 }

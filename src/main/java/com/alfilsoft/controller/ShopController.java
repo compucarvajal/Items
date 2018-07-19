@@ -57,7 +57,7 @@ public class ShopController {
         }
     }
     
-    @RequestMapping(value = "/search/{name}")
+    @RequestMapping(value = "/searchName/{name}")
     public ResponseEntity<List<Shop>> getShopSearch(@PathVariable("name") String name) {
         LOGGER.info("------------------------>Begin of getShopSearch by item name method");
         try {

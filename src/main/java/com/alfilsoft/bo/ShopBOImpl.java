@@ -42,7 +42,11 @@ public class ShopBOImpl implements ShopBO {
 
     @Override
     public List<Shop> search(String name) throws BOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return shopDAO.search(name);
+        } catch (Exception e) {
+            throw new BOException(e.getMessage(), e.getCause());
+        }
     }
 
    
