@@ -24,7 +24,7 @@ public interface ShopDAO extends CrudRepository<Shop, Long> {
     @Query("select c from Shop c where c.id =?1")
     public Shop search(Long idShop);
     
-    @Query("select c from Shop c where c.shortName Like %?1%")
+    @Query("select c from Shop c where c.shortName = ?1")
     public List<Shop> search(String name);
     
     
