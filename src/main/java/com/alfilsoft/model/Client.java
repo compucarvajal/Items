@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class Client implements java.io.Serializable {
 
     private Long id;
-    private String idClient;
+        private String idClient;
     private String client;
     private String idType;
 

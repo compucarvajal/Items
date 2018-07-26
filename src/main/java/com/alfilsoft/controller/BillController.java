@@ -8,10 +8,12 @@ package com.alfilsoft.controller;
 import com.alfilsoft.bo.BillBO;
 import com.alfilsoft.model.Bill;
 import com.alfilsoft.util.BOException;
+import java.util.List;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,6 +38,17 @@ public class BillController {
         try {
             billBO.save(bill);
             return new ResponseEntity(HttpStatus.OK);
+        } catch (BOException ex) {
+            LOGGER.info(ex.getMessage());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @RequestMapping(value = "/items/{shopId}")
+    public ResponseEntity<List<Bill>> getBills(@PathVariable(value = "shopId") String shopId) {
+        LOGGER.info("------------------------>Begin of getBills method");
+        try {
+            return new ResponseEntity<>(billBO.list(Long.valueOf(shopId)), HttpStatus.OK);
         } catch (BOException ex) {
             LOGGER.info(ex.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -51,12 +51,12 @@ public class ItemDetail implements java.io.Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "SECBILL")
-    public Bill getSecbill() {
+    @JoinColumn(name = "SECBILL",referencedColumnName = "SECBILL", nullable = false)
+    public Bill getBill() {
         return this.bill;
     }
 
-    public void setSecbill(Bill bill) {
+    public void setBill(Bill bill) {
         this.bill = bill;
     }
 
