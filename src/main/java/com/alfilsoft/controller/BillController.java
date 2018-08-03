@@ -44,11 +44,18 @@ public class BillController {
         }
     }
     
-    @RequestMapping(value = "/items/{shopId}")
+    @RequestMapping(value = "/bills/{shopId}")
     public ResponseEntity<List<Bill>> getBills(@PathVariable(value = "shopId") String shopId) {
         LOGGER.info("------------------------>Begin of getBills method");
         try {
-            return new ResponseEntity<>(billBO.list(Long.valueOf(shopId)), HttpStatus.OK);
+            List<Bill> bills = billBO.list(Long.valueOf(shopId));
+            bills.stream().map((bill) -> {
+                bill.setItemDetailList(null);
+                return bill;
+            }).forEachOrdered((bill) -> {
+                bill.getShop().setBillList(null);
+            });
+            return new ResponseEntity<>(bills, HttpStatus.OK);
         } catch (BOException ex) {
             LOGGER.info(ex.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);

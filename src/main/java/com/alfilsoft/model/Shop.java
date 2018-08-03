@@ -2,12 +2,17 @@ package com.alfilsoft.model;
 // default package
 // Generated Jul 9, 2018 4:19:10 PM by Hibernate Tools 5.0.6.Final
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,6 +33,7 @@ public class Shop implements java.io.Serializable {
     private String nit;
     private String personType;
     private String shortName;
+    private List<Bill> billList;
 
     public Shop() {
     }
@@ -121,6 +127,18 @@ public class Shop implements java.io.Serializable {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
+    @JsonIgnoreProperties
+    @OneToMany(mappedBy = "shop", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    public List<Bill> getBillList() {
+        return billList;
+    }
+
+    public void setBillList(List<Bill> billList) {
+        this.billList = billList;
+    }
+    
+    
 
     
     

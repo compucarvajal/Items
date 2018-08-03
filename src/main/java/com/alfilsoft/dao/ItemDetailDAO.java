@@ -6,7 +6,7 @@
 package com.alfilsoft.dao;
 
 import com.alfilsoft.model.Bill;
-import com.alfilsoft.model.Item;
+import com.alfilsoft.model.ItemDetail;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -15,12 +15,9 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author luis.carvajal
  */
-public interface BillDAO extends CrudRepository<Bill,Long>{
-    
-    @Override
-    public Bill save(Bill bill);
-    
-    @Query("select b from Bill b where b.shop.id =?1")
-    public List<Bill> list(Long idShop);
-    
+public interface ItemDetailDAO extends CrudRepository<ItemDetail, Long> {
+
+    @Query("select b from ItemDetail b where b.bill.id =?1")
+    public List<ItemDetail> list(Long billId);
+
 }

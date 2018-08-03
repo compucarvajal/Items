@@ -4,6 +4,7 @@ package com.alfilsoft.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,7 +51,7 @@ public class ItemDetail implements java.io.Serializable {
         this.id = id;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SECBILL",referencedColumnName = "SECBILL", nullable = false)
     public Bill getBill() {
         return this.bill;

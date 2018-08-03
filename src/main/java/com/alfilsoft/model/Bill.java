@@ -2,6 +2,7 @@ package com.alfilsoft.model;
 // default package
 // Generated Jul 9, 2018 4:19:10 PM by Hibernate Tools 5.0.6.Final
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -31,7 +32,11 @@ public class Bill implements java.io.Serializable {
     private Date creationDate;
     private Client client;
     private List<ItemDetail> itemDetailList;
-
+    private Shop shop;
+    
+   
+    
+    
     public Bill() {
     }
 
@@ -85,6 +90,7 @@ public class Bill implements java.io.Serializable {
         this.client = client;
     }
 
+    @JsonIgnoreProperties
     @OneToMany(mappedBy = "bill", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     public List<ItemDetail> getItemDetailList() {
         return itemDetailList;
@@ -93,5 +99,19 @@ public class Bill implements java.io.Serializable {
     public void setItemDetailList(List<ItemDetail> itemDetailList) {
         this.itemDetailList = itemDetailList;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "SECSHOP")
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+    
+    
+    
+    
 
 }
