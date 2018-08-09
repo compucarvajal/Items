@@ -53,7 +53,7 @@ public class BillController {
                 bill.setItemDetailList(null);
                 return bill;
             }).forEachOrdered((bill) -> {
-                bill.getShop().setBillList(null);
+                bill.setShop(null);
             });
             return new ResponseEntity<>(bills, HttpStatus.OK);
         } catch (BOException ex) {

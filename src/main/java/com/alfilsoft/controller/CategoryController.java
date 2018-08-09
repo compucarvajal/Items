@@ -26,35 +26,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/Alfilsoft/Api/v1/Category")
 public class CategoryController {
-
+    
     private static final Logger LOGGER = Logger.getAnonymousLogger();
-
+    
     @Autowired
     private CategoryBO categoryBO;
-
+    
     @RequestMapping(value = "/categories")
     public ResponseEntity<List<Category>> getCategories() {
         LOGGER.info("------------------------>Begin of getCategories method");
         try {
+            List<Category> list = categoryBO.list();
+            list.forEach((Category cat) -> {
+                cat.setShop(null);
+            });
             return new ResponseEntity<>(categoryBO.list(), HttpStatus.OK);
         } catch (BOException ex) {
             LOGGER.info(ex.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    
     @RequestMapping(value = "/categories/{shopId}")
-    public ResponseEntity<List<Category>> getCategoriesShop(@PathVariable("shopId") Long shopId) {
+    public ResponseEntity<List<Category>> getCategoriesShop(@PathVariable("shopId") String shopId) {
         try {
             LOGGER.info("------------------------>Begin of getCategoriesShop method");
-            return new ResponseEntity<>(categoryBO.list(shopId), HttpStatus.OK);
+            List<Category> list = categoryBO.list(Long.valueOf(shopId));
+            list.forEach((Category cat) -> {
+                cat.setShop(null);
+            });
+            return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (BOException ex) {
             LOGGER.info(ex.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
+        
     }
-
+    
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody Category category) {
         try {
@@ -64,7 +72,7 @@ public class CategoryController {
             LOGGER.info(ex.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
+        
     }
-
+    
 }

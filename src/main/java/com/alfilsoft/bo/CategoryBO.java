@@ -17,8 +17,6 @@ public interface CategoryBO {
     
     public Category save(Category category)throws BOException;
     
-    public Category save(Category category, Long shopId)throws BOException;
-    
     public List<Category> list()throws BOException;
     
     public List<Category> list(Long shopId)throws BOException;

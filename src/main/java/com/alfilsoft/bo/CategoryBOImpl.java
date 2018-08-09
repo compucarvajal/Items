@@ -45,9 +45,4 @@ public class CategoryBOImpl implements CategoryBO {
         }
     }
 
-    @Override
-    public Category save(Category category, Long shopId) throws BOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

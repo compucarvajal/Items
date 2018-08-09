@@ -22,7 +22,7 @@ public interface CategoryDAO extends CrudRepository<Category, Long>{
     @Query("select c from Category c")
     public List<Category> list();
     
-    @Query("select c from Category c where c.id=?1")
+    @Query("select c from Category c where c.shop.id=?1")
     public List<Category> list(Long shopId);
 
 }
