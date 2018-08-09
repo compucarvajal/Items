@@ -43,7 +43,7 @@ public class BillController {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @RequestMapping(value = "/bills/{shopId}")
     public ResponseEntity<List<Bill>> getBills(@PathVariable(value = "shopId") String shopId) {
         LOGGER.info("------------------------>Begin of getBills method");
@@ -56,6 +56,25 @@ public class BillController {
                 bill.setShop(null);
             });
             return new ResponseEntity<>(bills, HttpStatus.OK);
+        } catch (BOException ex) {
+            LOGGER.info(ex.getMessage());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/email/{shopId}/{billId}")
+    public ResponseEntity sendEmail(@PathVariable(value = "shopId") String shopId,
+            @PathVariable(value = "billId") String billId) {
+        ResponseEntity responseEntity;
+        LOGGER.info("------------------------>Begin of sendEmail method");
+        try {
+            Boolean band = billBO.sendEmail(Long.valueOf(shopId), Long.valueOf(billId));
+            if (band) {
+                responseEntity = new ResponseEntity(HttpStatus.OK);
+            } else {
+                responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
+            return responseEntity;
         } catch (BOException ex) {
             LOGGER.info(ex.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);

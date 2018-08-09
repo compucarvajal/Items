@@ -34,6 +34,7 @@ public class Shop implements java.io.Serializable {
     private String personType;
     private String shortName;
     private List<Bill> billList;
+    private String email;
 
     public Shop() {
     }
@@ -137,9 +138,14 @@ public class Shop implements java.io.Serializable {
     public void setBillList(List<Bill> billList) {
         this.billList = billList;
     }
-    
-    
 
-    
-    
+    @Column(name = "EMAIL")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

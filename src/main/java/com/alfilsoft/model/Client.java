@@ -22,9 +22,10 @@ import javax.persistence.Table;
 public class Client implements java.io.Serializable {
 
     private Long id;
-        private String idClient;
+    private String idClient;
     private String client;
     private String idType;
+    private String email;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_id_seq")
@@ -64,5 +65,17 @@ public class Client implements java.io.Serializable {
     public void setIdType(String idType) {
         this.idType = idType;
     }
+
+    @Column(name = "EMAIL")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
+    
 
 }

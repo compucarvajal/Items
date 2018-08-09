@@ -14,11 +14,11 @@ import java.util.List;
  * @author luis.carvajal
  */
 public interface BillBO {
-    
-    public Bill save(Bill bill)throws BOException;
-    
-    public List<Bill> list(Long shopId)throws BOException;
-    
-    
-    
+
+    public Bill save(Bill bill) throws BOException;
+
+    public List<Bill> list(Long shopId) throws BOException;
+
+    public Boolean sendEmail(Long shopId, Long billId) throws BOException;
+
 }
