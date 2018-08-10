@@ -62,7 +62,7 @@ public class BillBOImpl implements BillBO {
         
         if (null != bill && null != shop) {
             Util.sendEmail(bill.getClient().getEmail(), shop.getEmail(), "smtp.gmail.com", "Factura" + dateFormat.format(date),
-                    "Información de la factura", "compucarvajal", "L@@3128761260");
+                    "Información de la factura", "***", "++++");
             return TRUE;
         }
         return FALSE;
